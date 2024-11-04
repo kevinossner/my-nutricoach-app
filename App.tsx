@@ -14,6 +14,7 @@ import {
   BottomTabBarButtonProps,
   BottomTabNavigationOptions,
 } from "@react-navigation/bottom-tabs";
+import buttons from "./src/styles/buttons";
 
 import colors from "./src/styles/colors";
 import Home from "./src/screens/Home";
@@ -26,15 +27,13 @@ export default function App() {
     return null;
   }
 
-  interface CustomMiddleButtonProps extends BottomTabBarButtonProps {}
-
-  const CustomMiddleButton: React.FC<CustomMiddleButtonProps> = () => {
+  const ChatButton: React.FC<BottomTabBarButtonProps> = () => {
     return (
       <TouchableOpacity
         style={styles.middleButton}
         onPress={() => Alert.alert("AI Coach", "Work in progress...")}
       >
-        <Ionicons name="chatbubble-ellipses" size={24} color="white" />
+        <Ionicons name="chatbubble-ellipses" size={24} color={colors.white} />
       </TouchableOpacity>
     );
   };
@@ -68,10 +67,10 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Tab.Screen
-            name="MiddleButton"
+            name="Chat"
             component={EmptyScreen}
             options={{
-              tabBarButton: (props) => <CustomMiddleButton {...props} />,
+              tabBarButton: (props) => <ChatButton {...props} />,
             }}
           />
           <Tab.Screen
@@ -90,17 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   middleButton: {
-    top: -20, // Position above the tab bar
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: colors.primary,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 5,
+    ...buttons.roundedButton,
+    top: -20,
   },
 });
